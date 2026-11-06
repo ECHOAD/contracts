@@ -1,5 +1,7 @@
 [workspace]
 members = ["contracts/nft/*", "contracts/relationship/*"]
+# CosmWasm 1.5 contract with its own Cargo.lock (see its Cargo.toml).
+exclude = ["contracts/rewards/reward-vault"]
 
 [profile.release.package.auction-english]
 codegen-units = 1

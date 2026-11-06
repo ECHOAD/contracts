@@ -1,0 +1,48 @@
+[package]
+name = "reward-vault"
+version = "0.1.0"
+edition = "2021"
+description = "Host-funded reward campaigns for Passage events: PASG or pre-minted NFTs, paid out in batches by an authorized distributor under on-chain caps"
+license = "Apache-2.0"
+
+exclude = ["contract.wasm", "hash.txt"]
+
+# Standalone on purpose: the root Cargo.toml excludes this crate. passage-2 runs wasmd
+# v0.50.0 with wasmvm v1.5.0, so this contract targets CosmWasm 1.5, while the root
+# workspace pins cosmwasm-std 1.0.0-beta7. Joining it would re-resolve the shared Cargo.lock
+# of every existing contract. No [workspace] table here: cosmwasm/optimizer would treat it
+# as a workspace without members and build nothing.
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+# use library feature to disable all instantiate/execute/query exports
+library = []
+
+[dependencies]
+cosmwasm-schema = "1.5"
+cosmwasm-std = "1.5"
+cw-storage-plus = "1.2"
+cw-utils = "1.0.3"
+cw2 = "1.1.2"
+cw721 = "0.18.0"
+schemars = "0.8"
+serde = { version = "1.0", default-features = false, features = ["derive"] }
+thiserror = "1.0"
+
+[dev-dependencies]
+anyhow = "1"
+cw-multi-test = "0.20.0"
+cw721-base = { version = "0.18.0", features = ["library"] }
+
+[profile.release]
+opt-level = 3
+debug = false
+rpath = false
+lto = true
+debug-assertions = false
+codegen-units = 1
+panic = "abort"
+incremental = false
+overflow-checks = true
