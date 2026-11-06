@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CampaignNftsResponse",
+  "type": "object",
+  "required": [
+    "token_ids"
+  ],
+  "properties": {
+    "token_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

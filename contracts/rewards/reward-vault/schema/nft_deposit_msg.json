@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NftDepositMsg",
+  "description": "Payload of `SendNft` into the vault. The campaign is the sender's own: only its host can deposit into it.",
+  "type": "object",
+  "required": [
+    "campaign_id",
+    "tier_id"
+  ],
+  "properties": {
+    "campaign_id": {
+      "type": "string"
+    },
+    "tier_id": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}
