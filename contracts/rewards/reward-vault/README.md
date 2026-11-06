@@ -475,7 +475,10 @@ What it trusts:
 cargo test
 cargo clippy --all-targets -- -D warnings
 cargo build --release --lib --target wasm32-unknown-unknown
+cargo run --example schema
 ```
+
+- **Schema.** `cargo run --example schema` writes the JSON Schema of every message and query response to `schema/`, like the other contracts in this repository. Run it again after changing `msg.rs` or `state::Config`, and commit the result.
 
 - **CosmWasm 1.5.** passage-2 runs wasmd v0.50.0 with wasmvm v1.5.0, and an upgrade to wasmvm v2.2.9 is planned. This crate uses `cosmwasm-std` 1.5: it exports `interface_version_8`, which wasmvm 1.5 and 2.x both accept, so the same code works before and after the upgrade. Moving to `cosmwasm-std` 2.x would only work after it. Re-measure the gas of `payout` after the upgrade before setting `min_fee`.
 - **Standalone crate.** The root `Cargo.toml` excludes it on purpose: the root pins `cosmwasm-std` 1.0.0-beta7, and joining would re-resolve the shared `Cargo.lock` of every existing contract. The crate has no `[workspace]` table, so `cosmwasm/optimizer` builds it directly from its folder.

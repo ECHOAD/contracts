@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AddressClaimsResponse",
+  "type": "object",
+  "required": [
+    "tiers",
+    "total"
+  ],
+  "properties": {
+    "tiers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/TierCount"
+      }
+    },
+    "total": {
+      "description": "Claims paid to the address across all tiers.",
+      "type": "integer",
+      "format": "uint32",
+      "minimum": 0.0
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "TierCount": {
+      "type": "object",
+      "required": [
+        "count",
+        "tier_id"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        },
+        "tier_id": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
